@@ -2,7 +2,7 @@
   window.extractImmunizationData = function() {
     var retImmunization = $.Deferred();
 
-    function onError() {
+    function onImmunizationError() {
       console.log('Loading error', arguments);
       retImmunization.reject();
     }
@@ -23,18 +23,18 @@
                     }
                   });
           */
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv).fail(onImmunizationError);
 
         $.when(pt, obv).done(function(patient, obv) {
 
           // retImmunization.resolve(p);
         });
       } else {
-        onError();
+        onImmunizationError();
       }
     }
 
-    FHIR.oauth2.ready(onImmunizationReady, onError);
+    FHIR.oauth2.ready(onImmunizationReady, onImmunizationError);
     return retImmunization.promise();
 
   };
