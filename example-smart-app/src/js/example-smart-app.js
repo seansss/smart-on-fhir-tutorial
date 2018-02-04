@@ -11,7 +11,7 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-        var obv = smart.patient.api.fetchAll({
+        var obv = smart.patient.api.fetchAll([{
                     type: 'Observation',
                     query: {
                       code: {
@@ -20,7 +20,7 @@
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
                     }
-                  });
+                  }]);
 
         $.when(pt, obv).fail(onError);
 
